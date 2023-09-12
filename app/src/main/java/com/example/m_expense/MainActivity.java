@@ -3,6 +3,7 @@ package com.example.m_expense;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -24,10 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Spinner sp=(Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, trips);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(dataAdapter);
+
 
         datePicker=(DatePicker) findViewById(R.id.datePicker);
         Calendar c= Calendar.getInstance();
@@ -40,36 +38,35 @@ public class MainActivity extends AppCompatActivity {
                 int day =datePicker.getDayOfMonth();
                 int month= datePicker.getMonth();
                 int year = datePicker.getYear();
-                Toast.makeText(getApplicationContext(), day+"/"+(month+1)+"/"+year, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), day+"/"+(month+1)+"/"+year, Toast.LENGTH_LONG).show();
             }
         });
     }
     public void handleButtonClick(View v){
-        Spinner spinner =(Spinner)findViewById(R.id.spinner);
+        EditText editText2= (EditText)findViewById(R.id.TripName);
 
-        DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
-
-        EditText editText=(EditText)findViewById(R.id.editTextText);
-        RadioGroup rg=(RadioGroup) findViewById(R.id.radioGroup2);
-        if(!spinner.performClick()){
+        if(TextUtils.isEmpty(editText2.getText().toString())){
             Toast t= Toast.makeText(this, "you must choose name of trip", Toast.LENGTH_SHORT);
             t.show();
             return;
         }
+        EditText editText=(EditText)findViewById(R.id.editTextText);
+        if(TextUtils.isEmpty(editText.getText().toString())){
+            Toast t= Toast.makeText(this, "you must choose destination", Toast.LENGTH_SHORT);
+            t.show();
+            return;
+        }
 
+        DatePicker dp = (DatePicker)findViewById(R.id.datePicker);
         if(!dp.isScrollContainer()){
             Toast t= Toast.makeText(this, "you must choose date", Toast.LENGTH_SHORT);
             t.show();
             return;
         }
 
-        if(editText.getFreezesText()){
-            Toast t= Toast.makeText(this, "you must fill location", Toast.LENGTH_SHORT);
-            t.show();
-            return;
-        }
 
-        if(!rg.callOnClick()){
+        RadioGroup rg=(RadioGroup) findViewById(R.id.radioGroup2);
+        if(rg.getCheckedRadioButtonId()==-1){
             Toast t= Toast.makeText(this, "you must choose your option", Toast.LENGTH_SHORT);
             t.show();
             return;
