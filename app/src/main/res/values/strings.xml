@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">M-Expense</string>
+    <string name="name_of_trip">Name of trip</string>
+    <string-array name="Trip_array">
+        <item>Conference</item>
+        <item>Client meeting</item>
+        <item>Picnic</item>
+    </string-array>
+    <string name="destination">Destination</string>
+    <string name="date_of_trip">Date of trip</string>
+    <string name="risk_assessment">Requires risk assessment</string>
+    <string name="risk_assessment_yes">Yes</string>
+    <string name="risk_assessment_no">No</string>
+    <string name="note">Description</string>
 </resources>
