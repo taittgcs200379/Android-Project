@@ -18,7 +18,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String[] Length={"1000", "2000", "3000"};
+    private static final String[] Length={"1000m", "2000m", "3000m"};
     private static final String[] Level={"beginner", "professional"};
 
     AutoCompleteTextView date;
