@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         AutoCompleteTextView pLength= (AutoCompleteTextView)findViewById(R.id.length);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,Length);
-        //dataAdapter.setDropDownViewResource((android.R.layout.simple_dropdown_item_1line));
+        dataAdapter.setDropDownViewResource((android.R.layout.simple_dropdown_item_1line));
         pLength.setAdapter(dataAdapter);
         pLength.setThreshold(256);
 
