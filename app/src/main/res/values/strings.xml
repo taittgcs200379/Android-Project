@@ -1,10 +1,13 @@
 <resources>
-    <string name="app_name">M-Expense</string>
-    <string name="name_of_trip">Name of trip</string>
+    <string name="app_name">Hike</string>
+    <string name="name_of_hike">Name of Hike</string>
     <string name="destination">Destination</string>
-    <string name="date_of_trip">Date of trip</string>
-    <string name="risk_assessment">Requires risk assessment</string>
-    <string name="risk_assessment_yes">Yes</string>
-    <string name="risk_assessment_no">No</string>
+    <string name="date_of_hike">Date of hike</string>
+    <string name="length_the_hike">Length the hike</string>
+    <string name="level_of_difficulty"> Level of difficulty</string>
+    <string name="parking">Parking Requirement</string>
+    <string name="Parking_requirement_yes">Yes</string>
+    <string name="Parking_requirement_no">No</string>
     <string name="note">Description</string>
+    <string name="save">Save</string>
 </resources>
