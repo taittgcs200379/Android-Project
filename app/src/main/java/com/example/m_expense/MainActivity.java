@@ -1,6 +1,9 @@
 package com.example.m_expense;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -122,9 +126,47 @@ public class MainActivity extends AppCompatActivity {
             Toast t= Toast.makeText(this, "you must choose your option", Toast.LENGTH_SHORT);
             t.show();
             return;
+
         }
+        else {
+            displayAlert();
+        }
+    }
+    public void displayAlert(){
+        EditText mName = (EditText)findViewById(R.id.TripName);
+        String name= mName.getText().toString();
+        EditText mDestination = (EditText)findViewById(R.id.editTextText);
+        String destination= mDestination.getText().toString();
+        EditText eDate = (EditText)findViewById(R.id.date);
+        String date= eDate.getText().toString();
+        EditText eLength = (EditText)findViewById(R.id.length);
+        String length= eLength.getText().toString();
+        EditText eLevel = (EditText)findViewById(R.id.level);
+        String levels= eLevel.getText().toString();
+        RadioGroup eGroup = (RadioGroup) findViewById(R.id.radioGroup2);
+        RadioButton eChoice= (RadioButton)findViewById(eGroup.getCheckedRadioButtonId());
+        String choice= eChoice.getText().toString();
+        EditText eDescription = (EditText)findViewById(R.id.editTextTextMultiLine);
+        String description= eDescription.getText().toString();
+
+        new AlertDialog.Builder(this)
+                .setTitle("Details of order")
+                .setMessage("Details enter:\n" +
+                        name+"\n"+
+                        destination+"\n"+
+                        length+"\n"+
+                        levels+"\n"+
+                        choice+"\n"+
+                        description+"\n"
+                ).setNeutralButton("back", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
 
 
     }
+
 
 }
