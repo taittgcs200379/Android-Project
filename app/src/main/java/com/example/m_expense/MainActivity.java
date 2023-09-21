@@ -130,6 +130,14 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             displayAlert();
+            Button savebtn = (Button)findViewById(R.id.button2);
+            savebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveDetails();
+                }
+            });
+
         }
     }
     public void displayAlert(){
@@ -166,6 +174,28 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
 
 
+    }
+    private void  saveDetails(){
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        EditText hikeName =(EditText) findViewById(R.id.TripName);
+        EditText hikeDestination=(EditText) findViewById(R.id.editTextText);
+        AutoCompleteTextView hikeDate =(AutoCompleteTextView) findViewById(R.id.date);
+        AutoCompleteTextView hikeLength =(AutoCompleteTextView) findViewById(R.id.length);
+        AutoCompleteTextView hikeLevel =(AutoCompleteTextView) findViewById(R.id.level);
+        RadioGroup groupChoice =(RadioGroup) findViewById(R.id.radioGroup2);
+        RadioButton parkingChoice=(RadioButton)findViewById(groupChoice.getCheckedRadioButtonId());
+        EditText hikeDescription=(EditText) findViewById(R.id.editTextTextMultiLine);
+
+        String name = hikeName.getText().toString();
+        String destination =hikeDestination.getText().toString();
+        String date = hikeDate.getText().toString();
+        String length = hikeLength.getText().toString();
+        String level = hikeLevel.getText().toString();
+        String choice = parkingChoice.getText().toString();
+        String description = hikeDescription.getText().toString();
+
+        long hikeId = dbHelper.insertHikeDetails(name,destination,date,length,level,choice,description);
+        Toast.makeText(this, "Hiking trip has been created with id" + hikeId, Toast.LENGTH_LONG).show();
     }
 
 

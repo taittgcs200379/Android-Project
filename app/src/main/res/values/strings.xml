@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hike</string>
+    <string name="app_name">M-Hike</string>
     <string name="name_of_hike">Name of Hike</string>
     <string name="destination">Destination</string>
     <string name="date_of_hike">Date of hike</string>
