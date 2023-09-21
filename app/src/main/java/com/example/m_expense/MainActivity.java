@@ -130,14 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             displayAlert();
-            Button savebtn = (Button)findViewById(R.id.button2);
-            savebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    saveDetails();
-                }
-            });
-
+            saveDetails();
         }
     }
     public void displayAlert(){
@@ -162,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("Details enter:\n" +
                         name+"\n"+
                         destination+"\n"+
+                        date+"\n"+
                         length+"\n"+
                         levels+"\n"+
                         choice+"\n"+

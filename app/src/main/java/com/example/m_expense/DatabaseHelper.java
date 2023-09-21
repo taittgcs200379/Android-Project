@@ -8,14 +8,14 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME= "hiking_details";
-    private static final  String HIKE_TABLE_NAME="hike details";
+    private static final  String HIKE_TABLE_NAME="hike_details";
     private static final String HIKE_COLUMN_ID="hike_id";
-    private static final String HIKE_COLUMN_NAME="name of hike";
+    private static final String HIKE_COLUMN_NAME="name";
     private static final String HIKE_COLUMN_DESTINATION="destination";
     private static final String HIKE_COLUMN_DATE="date";
-    private static final String HIKE_COLUMN_LENGTH="length of hike";
+    private static final String HIKE_COLUMN_LENGTH="length";
     private static final String HIKE_COLUMN_LEVEL="level";
-    private static final String HIKE_COLUMN_CHOICE="parking requirement";
+    private static final String HIKE_COLUMN_CHOICE="choice";
     private static final String HIKE_COLUMN_DESCRIPTION="description";
     private SQLiteDatabase database;
     private static final String HIKE_DETAILS_QUERY= String.format(
@@ -40,7 +40,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL(" DROP TABLE IF EXISTS " + DATABASE_NAME);
-        Log.w(this.getClass().getName(), DATABASE_NAME +"database upgrade to version" + newVersion+"-old data lost");
+        Log.w(this.getClass().getName(), DATABASE_NAME +"database upgrade to version" + newVersion + "-old data lost");
+        onCreate(db);
+
     }
     public long insertHikeDetails(String name, String destination, String date, String length,String level, String choice, String description){
         ContentValues rowValues = new ContentValues();
@@ -51,11 +53,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(HIKE_COLUMN_LEVEL, level);
         rowValues.put(HIKE_COLUMN_CHOICE, choice);
         rowValues.put(HIKE_COLUMN_DESCRIPTION, description);
-        return database.insertOrThrow(DATABASE_NAME, null, rowValues);
+        return database.insertOrThrow(HIKE_TABLE_NAME, null, rowValues);
     }
     public String getHikeDetails(){
-        Cursor results= database.query("hike details", new String[]{"hike_id", "name of hike","destination", "date","length of hike","level","parking requirement","description"},
-                null, null, null ,null, "name of hike");
+        Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},
+                null, null, null ,null, "name");
         String resultText="";
         results.moveToFirst();
         while (!results.isAfterLast()){
