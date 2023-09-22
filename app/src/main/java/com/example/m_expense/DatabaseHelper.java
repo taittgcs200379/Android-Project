@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.SyncStateContract;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME= "hiking_details";
@@ -69,13 +72,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String level = results.getString(5);
             String choice = results.getString(6);
             String description = results.getString(7);
-            resultText+=id + "" + name + "" + destination + "" + date + "" + length + "" + level + "" + choice + "" + description+"\n";
+            resultText+= "ID: "+id + "\n"
+                    + "Name of Hiking: "+ name + "\n"
+                    + "Destination: "+destination + "\n"
+                    + "Date: "+date + "\n"
+                    + "Length: "+length + "\n"
+                    + "Level: "+level + "\n"
+                    + "Parking Choice: "+ choice + "\n"
+                    + "Description: "+description+"\n"+"\n";
             results.moveToNext();
         }
         return resultText;
     }
+    public ArrayList<HikingModel>getAllData(){
+        ArrayList<HikingModel> arrayList =new ArrayList<>();
+        String selectQuery=" SELECT * FROM " + HIKE_TABLE_NAME;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor=db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                HikingModel hikingModel = new HikingModel(
+                        ""+cursor.getInt(cursor.getColumnIndexOrThrow(HIKE_COLUMN_ID)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_NAME)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DESTINATION)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DATE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_LENGTH)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_LEVEL)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_CHOICE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DESCRIPTION))
+                );
+                arrayList.add(hikingModel);
+            }while (cursor.moveToNext());
 
-
+        }
+        db.close();
+        return arrayList;
+    }
 
 }
 

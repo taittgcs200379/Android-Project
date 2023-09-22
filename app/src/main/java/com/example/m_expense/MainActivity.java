@@ -1,11 +1,15 @@
 package com.example.m_expense;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -191,6 +195,32 @@ public class MainActivity extends AppCompatActivity {
         long hikeId = dbHelper.insertHikeDetails(name,destination,date,length,level,choice,description);
         Toast.makeText(this, "Hiking trip has been created with id" + hikeId, Toast.LENGTH_LONG).show();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem list = menu.findItem(R.id.AccessList);
+        MenuItem creator =menu.findItem(R.id.HikingCreator);
+        list.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                Intent t = new Intent(getApplicationContext(),TripsDetails.class);
+                startActivity(t);
+
+                return false;
+            }
+        });
+        creator.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                Intent c = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(c);
+
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
 
 }
