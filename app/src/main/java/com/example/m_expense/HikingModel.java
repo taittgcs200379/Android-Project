@@ -18,7 +18,7 @@ public class HikingModel {
         return hikingId;
     }
 
-    public void setHikingId(String hikingId) {
+    public void setHikingId() {
         this.hikingId = hikingId;
     }
 

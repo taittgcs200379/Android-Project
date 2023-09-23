@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -28,8 +29,15 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
     private static final String[] Length={"1000m", "2000m", "3000m"};
     private static final String[] Level={"beginner", "professional"};
+    private static final String[] Choice={"Yes", "No"};
 
-    AutoCompleteTextView date;
+    public boolean EditMode;
+
+    String  uId, uName, uDestination, uDate, uLength, uLevel, uChoice, uDescription;
+    EditText name, destination, description;
+    AutoCompleteTextView date,length,level,choice;
+
+
     Button btDate;
 
     @Override
@@ -64,9 +72,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        AutoCompleteTextView pChoice= (AutoCompleteTextView)findViewById(R.id.choice);
+        ArrayAdapter<String> choiceAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,Choice);
+        //dataAdapter.setDropDownViewResource((android.R.layout.simple_dropdown_item_1line));
+        pChoice.setAdapter(choiceAdapter);
+        pChoice.setThreshold(256);
 
+        findViewById(R.id.choice).setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View view){
+                pChoice.showDropDown();
+            }
+        });
+
+
+        name=findViewById(R.id.TripName);
+        destination=findViewById(R.id.editTextText);
         date=findViewById(R.id.date);
         btDate=findViewById(R.id.date_button);
+        length=findViewById(R.id.length);
+        level=findViewById(R.id.level);
+        choice=findViewById(R.id.choice);
+        description=findViewById(R.id.editTextTextMultiLine);
+        Intent edit=getIntent();
+        EditMode= edit.getBooleanExtra("EditMode",false);
+
+        if(EditMode){
+            uId=edit.getStringExtra("hike_id");
+            uName=edit.getStringExtra("name");
+            uDestination=edit.getStringExtra("destination");
+            uDate=edit.getStringExtra("date");
+            uLevel=edit.getStringExtra("level");
+            uLength=edit.getStringExtra("length");
+            uChoice=edit.getStringExtra("choice");
+            uDescription=edit.getStringExtra("description");
+
+
+            name.setText(uName);
+            destination.setText(uDestination);
+            date.setText(uDate);
+            length.setText(uLength);
+            level.setText(uLevel);
+            choice.setText(uChoice);
+            description.setText(uDescription);
+        }
+
+
 
         btDate.setOnClickListener(new OnClickListener() {
             @Override
@@ -74,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 showDatePickerDialog();
             }
         });
-
     }
 
     private void showDatePickerDialog() {
@@ -125,8 +175,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        RadioGroup rg=(RadioGroup) findViewById(R.id.radioGroup2);
-        if(rg.getCheckedRadioButtonId()==-1){
+        AutoCompleteTextView rg=(AutoCompleteTextView) findViewById(R.id.choice);
+        if(TextUtils.isEmpty(level.getText().toString())){
             Toast t= Toast.makeText(this, "you must choose your option", Toast.LENGTH_SHORT);
             t.show();
             return;
@@ -148,8 +198,7 @@ public class MainActivity extends AppCompatActivity {
         String length= eLength.getText().toString();
         EditText eLevel = (EditText)findViewById(R.id.level);
         String levels= eLevel.getText().toString();
-        RadioGroup eGroup = (RadioGroup) findViewById(R.id.radioGroup2);
-        RadioButton eChoice= (RadioButton)findViewById(eGroup.getCheckedRadioButtonId());
+        AutoCompleteTextView eChoice= (AutoCompleteTextView) findViewById(R.id.choice);
         String choice= eChoice.getText().toString();
         EditText eDescription = (EditText)findViewById(R.id.editTextTextMultiLine);
         String description= eDescription.getText().toString();
@@ -180,9 +229,9 @@ public class MainActivity extends AppCompatActivity {
         AutoCompleteTextView hikeDate =(AutoCompleteTextView) findViewById(R.id.date);
         AutoCompleteTextView hikeLength =(AutoCompleteTextView) findViewById(R.id.length);
         AutoCompleteTextView hikeLevel =(AutoCompleteTextView) findViewById(R.id.level);
-        RadioGroup groupChoice =(RadioGroup) findViewById(R.id.radioGroup2);
-        RadioButton parkingChoice=(RadioButton)findViewById(groupChoice.getCheckedRadioButtonId());
+        AutoCompleteTextView parkingChoice =(AutoCompleteTextView) findViewById(R.id.choice);
         EditText hikeDescription=(EditText) findViewById(R.id.editTextTextMultiLine);
+
 
         String name = hikeName.getText().toString();
         String destination =hikeDestination.getText().toString();
@@ -192,8 +241,20 @@ public class MainActivity extends AppCompatActivity {
         String choice = parkingChoice.getText().toString();
         String description = hikeDescription.getText().toString();
 
-        long hikeId = dbHelper.insertHikeDetails(name,destination,date,length,level,choice,description);
-        Toast.makeText(this, "Hiking trip has been created with id" + hikeId, Toast.LENGTH_LONG).show();
+
+
+
+            if(EditMode){
+
+                dbHelper.updateHikeDetails(""+uId,name,destination,date,length,level,choice,description);
+                Toast.makeText(this, "Hiking trip has been updated" , Toast.LENGTH_LONG).show();
+            }
+            else{
+                long hikeId = dbHelper.insertHikeDetails(name,destination,date,length,level,choice,description);
+                Toast.makeText(this, "Hiking trip has been created with id: " + hikeId, Toast.LENGTH_LONG).show();
+            }
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

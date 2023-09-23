@@ -1,10 +1,13 @@
 package com.example.m_expense;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +35,50 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
 
         String id= hikingModel.getHikingId();
         String name=hikingModel.getHikingName();
+        String destination=hikingModel.getHikingDestination();
+        String date=hikingModel.getHikingDate();
+        String length=hikingModel.getHikingLength();
+        String level=hikingModel.getHikingLevel();
+        String choice=hikingModel.getParkingChoice();
+        String description=hikingModel.getHikingDescription();
+
         holder.hikingName.setText(name);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detail = new Intent(context, DetailsOfHike.class);
+                detail.putExtra("hikingId",id);
+                context.startActivity(detail);
+
+            }
+        });
+        holder.editHiking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(context, MainActivity.class);
+                edit.putExtra("hike_id",id);
+                edit.putExtra("name",name);
+                edit.putExtra("destination",destination);
+                edit.putExtra("date",date);
+                edit.putExtra("length",length);
+                edit.putExtra("level",level);
+                edit.putExtra("choice",choice);
+                edit.putExtra("description",description);
+                edit.putExtra("EditMode",true);
+                context.startActivity(edit);
+            }
+        });
+        holder.deleteHiking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"Delete",Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -43,10 +88,13 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
     class HikingViewHolder extends RecyclerView.ViewHolder{
 
         TextView hikingName;
+        Button editHiking, deleteHiking;
         public HikingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             hikingName=itemView.findViewById(R.id.hikingName);
+            editHiking=itemView.findViewById(R.id.editHiking);
+            deleteHiking=itemView.findViewById(R.id.deleteHiking);
         }
     }
 }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MExpense"
         tools:targetApi="31">
         <activity
+            android:name=".DetailsOfHike"
+            android:exported="false" />
+        <activity
             android:name=".TripsDetails"
             android:exported="false" />
         <activity

@@ -4,22 +4,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.SyncStateContract;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     private static final String DATABASE_NAME= "hiking_details";
-    private static final  String HIKE_TABLE_NAME="hike_details";
-    private static final String HIKE_COLUMN_ID="hike_id";
-    private static final String HIKE_COLUMN_NAME="name";
-    private static final String HIKE_COLUMN_DESTINATION="destination";
-    private static final String HIKE_COLUMN_DATE="date";
-    private static final String HIKE_COLUMN_LENGTH="length";
-    private static final String HIKE_COLUMN_LEVEL="level";
-    private static final String HIKE_COLUMN_CHOICE="choice";
-    private static final String HIKE_COLUMN_DESCRIPTION="description";
+    public static final  String HIKE_TABLE_NAME="hike_details";
+    public static final String HIKE_COLUMN_ID="hike_id";
+    public static final String HIKE_COLUMN_NAME="name";
+    public static final String HIKE_COLUMN_DESTINATION="destination";
+    public static final String HIKE_COLUMN_DATE="date";
+    public static final String HIKE_COLUMN_LENGTH="length";
+    public static final String HIKE_COLUMN_LEVEL="level";
+    public static final String HIKE_COLUMN_CHOICE="choice";
+    public static final String HIKE_COLUMN_DESCRIPTION="description";
     private SQLiteDatabase database;
     private static final String HIKE_DETAILS_QUERY= String.format(
             "CREATE TABlE %s(" +
@@ -57,6 +57,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(HIKE_COLUMN_CHOICE, choice);
         rowValues.put(HIKE_COLUMN_DESCRIPTION, description);
         return database.insertOrThrow(HIKE_TABLE_NAME, null, rowValues);
+    }
+    public long updateHikeDetails(String id,String name, String destination, String date, String length, String level, String choice, String description){
+        ContentValues rowValues = new ContentValues();
+        rowValues.put(HIKE_COLUMN_NAME, name);
+        rowValues.put(HIKE_COLUMN_DESTINATION, destination);
+        rowValues.put(HIKE_COLUMN_DATE, date);
+        rowValues.put(HIKE_COLUMN_LENGTH, length);
+        rowValues.put(HIKE_COLUMN_LEVEL, level);
+        rowValues.put(HIKE_COLUMN_CHOICE, choice);
+        rowValues.put(HIKE_COLUMN_DESCRIPTION, description);
+        return database.update(HIKE_TABLE_NAME,rowValues,HIKE_COLUMN_ID+" =? ", new String[]{id});
+
+
     }
     public String getHikeDetails(){
         Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},
