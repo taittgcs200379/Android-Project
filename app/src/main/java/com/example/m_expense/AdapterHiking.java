@@ -17,9 +17,11 @@ import java.util.ArrayList;
 public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingViewHolder> {
     private Context context;
     private ArrayList<HikingModel> hikingList;
+    private DatabaseHelper databaseHelper;
     public AdapterHiking(Context context, ArrayList<HikingModel> hikingList){
         this.context=context;
         this.hikingList=hikingList;
+        databaseHelper= new DatabaseHelper(context);
     }
     @NonNull
     @Override
@@ -72,8 +74,9 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
         holder.deleteHiking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"Delete",Toast.LENGTH_SHORT).show();
+                databaseHelper.deleteHikeDetails(id);
 
+                ((TripsDetails)context).onResume();
             }
         });
     }

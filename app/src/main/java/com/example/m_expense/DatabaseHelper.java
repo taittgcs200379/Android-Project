@@ -71,6 +71,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+    public long deleteHikeDetails(String id){
+        return database.delete(HIKE_TABLE_NAME,HIKE_COLUMN_ID+" =? ", new String[]{id});
+    }
+    public void deleteAllHikeData(){
+       database.execSQL(" DELETE FROM "+HIKE_TABLE_NAME);
+       database.close();
+
+    }
     public String getHikeDetails(){
         Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},
                 null, null, null ,null, "name");
@@ -120,6 +128,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return arrayList;
+    }
+    public ArrayList<HikingModel>getSearchData(String query){
+        ArrayList<HikingModel> hikeList =new ArrayList<>();
+        String searchQuery=" SELECT * FROM " + HIKE_TABLE_NAME+" WHERE "+HIKE_COLUMN_NAME+" LIKE '%"+query+"%'";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor=db.rawQuery(searchQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                HikingModel hikingModel = new HikingModel(
+                        ""+cursor.getInt(cursor.getColumnIndexOrThrow(HIKE_COLUMN_ID)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_NAME)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DESTINATION)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DATE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_LENGTH)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_LEVEL)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_CHOICE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(HIKE_COLUMN_DESCRIPTION))
+                );
+                hikeList.add(hikingModel);
+            }while (cursor.moveToNext());
+
+        }
+        db.close();
+        return hikeList;
     }
 
 }

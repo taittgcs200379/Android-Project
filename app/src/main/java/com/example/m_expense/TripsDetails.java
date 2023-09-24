@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,26 @@ public class TripsDetails extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem list = menu.findItem(R.id.AccessList);
-        MenuItem creator =menu.findItem(R.id.HikingCreator);
+        MenuItem creator = menu.findItem(R.id.HikingCreator);
+        MenuItem search = menu.findItem(R.id.SearchItem);
+        SearchView searchView = (SearchView) search.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchHike(query);
+                return true ;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchHike(newText);
+                return true;
+            }
+        });
+
+
+
         list.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
@@ -58,6 +78,12 @@ public class TripsDetails extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void searchHike(String query) {
+        adapterHiking= new AdapterHiking(this,dbHelper.getSearchData(query));
+        hikingRV.setAdapter(adapterHiking);
+
     }
 
 

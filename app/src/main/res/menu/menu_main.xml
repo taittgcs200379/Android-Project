@@ -13,4 +13,10 @@
         android:enabled="true"
         android:title="Create Hiking"
         android:visible="true" />
+    <item
+        android:id="@+id/SearchItem"
+        android:title="Search"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText"
+        app:actionViewClass="android.widget.SearchView"/>
 </menu>
