@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="19dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView2"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/observation"
+        app:layout_constraintBottom_toTopOf="@+id/observation_creator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,85 +23,112 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginBottom="41dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        android:layout_marginBottom="48dp"
+        android:text="@string/observation_date"
+        app:layout_constraintBottom_toTopOf="@+id/observation_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView2" />
+        app:layout_constraintTop_toBottomOf="@+id/observation_creator" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="22dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine2"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/observation_description"
+        app:layout_constraintBottom_toTopOf="@+id/observation_description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="34dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        android:layout_marginEnd="13dp"
+        android:text="Date"
+        app:layout_constraintBottom_toBottomOf="@+id/observation_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/autoCompleteTextView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintStart_toEndOf="@+id/observation_date" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="246dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="46dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="354dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="29dp"
-        android:text="AutoCompleteTextView"
+        android:id="@+id/observation_creator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="19dp"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView4"
+        android:id="@+id/observation_date"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="50dp"
-        android:text="AutoCompleteTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        android:layout_height="0dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
-        android:layout_width="352dp"
-        android:layout_height="187dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="15dp"
+        android:id="@+id/observation_description"
+        android:layout_width="349dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="115dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="34dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/autoCompleteTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/observation_date" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="77dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:text="Button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/autoCompleteTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/autoCompleteTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

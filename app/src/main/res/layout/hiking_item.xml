@@ -10,12 +10,12 @@
 
     <RelativeLayout
         android:layout_width="400dp"
-        android:layout_height="100dp">
+        android:layout_height="120dp">
 
         <TextView
             android:id="@+id/hikingName"
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="85dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="false"
             android:layout_centerInParent="true"
@@ -25,16 +25,25 @@
 
         <Button
             android:id="@+id/editHiking"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:backgroundTint="@color/yellow"
             android:text="EDIT"></Button>
 
         <Button
+            android:id="@+id/observeHiking"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:backgroundTint="@color/green"
+            android:text="OBSERVE"></Button>
+
+        <Button
             android:id="@+id/deleteHiking"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/red"

@@ -10,4 +10,8 @@
     <string name="Parking_requirement_no">No</string>
     <string name="note">Description</string>
     <string name="save">Save</string>
+    <string name="observation">Observation</string>
+    <string name="observation_date">Date</string>
+    <string name="observation_description">Description</string>
+    <string name="observation_button">Save</string>
 </resources>

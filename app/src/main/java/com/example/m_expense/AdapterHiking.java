@@ -71,6 +71,13 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
                 context.startActivity(edit);
             }
         });
+        holder.observeHiking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent t = new Intent(context,ObserveCreator.class);
+                context.startActivity(t);
+            }
+        });
         holder.deleteHiking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +86,7 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
                 ((TripsDetails)context).onResume();
             }
         });
+
     }
 
 
@@ -91,13 +99,14 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
     class HikingViewHolder extends RecyclerView.ViewHolder{
 
         TextView hikingName;
-        Button editHiking, deleteHiking;
+        Button editHiking, deleteHiking, observeHiking;
         public HikingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             hikingName=itemView.findViewById(R.id.hikingName);
             editHiking=itemView.findViewById(R.id.editHiking);
             deleteHiking=itemView.findViewById(R.id.deleteHiking);
+            observeHiking=itemView.findViewById(R.id.observeHiking);
         }
     }
 }
