@@ -117,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
             description.setText(uDescription);
         }
 
-
-
         btDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

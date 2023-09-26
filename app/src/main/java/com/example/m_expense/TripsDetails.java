@@ -78,6 +78,8 @@ public class TripsDetails extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+
+
     }
 
     private void searchHike(String query) {
