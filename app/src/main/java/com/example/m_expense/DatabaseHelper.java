@@ -20,6 +20,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String HIKE_COLUMN_LEVEL="level";
     public static final String HIKE_COLUMN_CHOICE="choice";
     public static final String HIKE_COLUMN_DESCRIPTION="description";
+    public static final  String OBSERVATION_TABLE_NAME="observation_details";
+    public static final String OBSERVATION_ID="observation_id";
+    public static final String HIKE_FOREIGN_ID="hike_id";
+    public static final String OBSERVATION_COLUMN_NAME="observation_name";
+    public static final String OBSERVATION_COLUMN_DATE="observation_date";
+    public static final String OBSERVATION_COLUMN_TIME="observation_time";
+    public static final String OBSERVATION_COLUMN_DESCRIPTION="observation_description";
+
     private SQLiteDatabase database;
     private static final String HIKE_DETAILS_QUERY= String.format(
             "CREATE TABlE %s(" +
