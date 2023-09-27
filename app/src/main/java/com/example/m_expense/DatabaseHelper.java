@@ -40,6 +40,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "%s TEXT, " +
                     "%s TEXT)",
             HIKE_TABLE_NAME, HIKE_COLUMN_ID, HIKE_COLUMN_NAME, HIKE_COLUMN_DESTINATION,HIKE_COLUMN_DATE,HIKE_COLUMN_LENGTH, HIKE_COLUMN_LEVEL,HIKE_COLUMN_CHOICE,HIKE_COLUMN_DESCRIPTION);
+    private static final String OBSERVATION_TABLE = String.format(
+            "CREATE TABlE %s(" +
+                    "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "%s INTEGER FOREIGN KEY , " +
+                    "%s TEXT, " +
+                    "%s TEXT, " +
+                    "%s TEXT, " +
+                    "%s TEXT)",
+            OBSERVATION_TABLE_NAME, OBSERVATION_ID, OBSERVATION_FOREIGN_ID, OBSERVATION_COLUMN_NAME, OBSERVATION_COLUMN_DATE, OBSERVATION_COLUMN_TIME, OBSERVATION_COLUMN_DESCRIPTION);
     public DatabaseHelper(Context context){
         super(context,DATABASE_NAME,null,1);
         database = getWritableDatabase();
@@ -47,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         db.execSQL(HIKE_DETAILS_QUERY);
+        db.execSQL(OBSERVATION_TABLE);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
