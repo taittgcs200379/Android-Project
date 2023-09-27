@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String HIKE_COLUMN_DESCRIPTION="description";
     public static final  String OBSERVATION_TABLE_NAME="observation_details";
     public static final String OBSERVATION_ID="observation_id";
-    public static final String HIKE_FOREIGN_ID="hike_id";
+    public static final String OBSERVATION_FOREIGN_ID="observation_id2";
     public static final String OBSERVATION_COLUMN_NAME="observation_name";
     public static final String OBSERVATION_COLUMN_DATE="observation_date";
     public static final String OBSERVATION_COLUMN_TIME="observation_time";
