@@ -3,9 +3,12 @@ package com.example.m_expense;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +16,9 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -59,6 +64,56 @@ public class ObserveCreator extends AppCompatActivity {
                 showTimePickerDialog();
             }
         });
+
+    }
+    public void handleButtonClick(View view){
+
+        EditText observeName= (EditText)findViewById(R.id.observation_creator);
+        if(TextUtils.isEmpty(observeName.getText().toString())){
+            Toast t= Toast.makeText(this, "you must choose observation", Toast.LENGTH_SHORT);
+            t.show();
+            return;
+        }
+       AutoCompleteTextView observeDate= (AutoCompleteTextView)findViewById(R.id.observation_date);
+        if(TextUtils.isEmpty(observeDate.getText().toString())){
+            Toast t= Toast.makeText(this, "you must choose date", Toast.LENGTH_SHORT);
+            t.show();
+            return;
+        }
+        AutoCompleteTextView observeTime= (AutoCompleteTextView)findViewById(R.id.time);
+        if(TextUtils.isEmpty(observeTime.getText().toString())){
+            Toast t= Toast.makeText(this, "you must choose time", Toast.LENGTH_SHORT);
+            t.show();
+            return;
+        }
+        else{
+            displayAlert();
+        }
+    }
+    public void displayAlert(){
+        EditText oName = (EditText)findViewById(R.id.observation_creator);
+        String name= oName.getText().toString();
+        AutoCompleteTextView oDate= (AutoCompleteTextView) findViewById(R.id.observation_date);
+        String date= oDate.getText().toString();
+        AutoCompleteTextView oTime= (AutoCompleteTextView) findViewById(R.id.time);
+        String time= oTime.getText().toString();
+        EditText oComment= (EditText)findViewById(R.id.comment);
+        String comment= oComment.getText().toString();
+
+        new AlertDialog.Builder(this)
+                .setTitle("Details of order")
+                .setMessage("Details enter:\n" +
+                        name+"\n"+
+                        date+"\n"+
+                        time+"\n"+
+                        comment+"\n"
+                ).setNeutralButton("back", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).show();
+
 
     }
 
