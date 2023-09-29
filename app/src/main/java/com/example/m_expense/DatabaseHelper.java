@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String HIKE_COLUMN_LEVEL="level";
     public static final String HIKE_COLUMN_CHOICE="choice";
     public static final String HIKE_COLUMN_DESCRIPTION="description";
-    public static final  String OBSERVATION_TABLE_NAME="observation_details";
+    public static final  String OBSERVATION_TABLE_NAME="observation_name";
     public static final String OBSERVATION_ID="observation_id";
     public static final String OBSERVATION_FOREIGN_ID="observation_id2";
     public static final String OBSERVATION_COLUMN_NAME="observation_name";
@@ -96,6 +96,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        database.execSQL(" DELETE FROM "+HIKE_TABLE_NAME);
        database.close();
 
+    }
+    public long insertObservationDetails(int foreignKey, String name,  String date,String time, String comment){
+        ContentValues rowValues = new ContentValues();
+        rowValues.put(OBSERVATION_FOREIGN_ID, foreignKey);
+        rowValues.put(OBSERVATION_COLUMN_NAME, name);
+        rowValues.put(OBSERVATION_COLUMN_DATE, date);
+        rowValues.put(OBSERVATION_COLUMN_TIME, time);
+        rowValues.put(OBSERVATION_COLUMN_DESCRIPTION, comment);
+        return database.insertOrThrow(OBSERVATION_TABLE, null, rowValues);
     }
     public String getHikeDetails(){
         Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},
