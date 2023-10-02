@@ -77,6 +77,7 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
                 Intent t = new Intent(context,ObserveCreator.class);
                 t.putExtra("hike_id",id);
                 t.putExtra("date",date);
+                t.putExtra("SendData",true);
                 context.startActivity(t);
             }
         });

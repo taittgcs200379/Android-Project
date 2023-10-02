@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OBSERVATION_TABLE = String.format(
             "CREATE TABlE %s(" +
                     "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "%s INTEGER FOREIGN KEY , " +
+                    "%s FOREIGN KEY , " +
                     "%s TEXT, " +
                     "%s TEXT, " +
                     "%s TEXT, " +
@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        database.close();
 
     }
-    public long insertObservationDetails(int foreignKey, String name,  String date,String time, String comment){
+    public long insertObservationDetails(String foreignKey, String name, String date, String time, String comment){
         ContentValues rowValues = new ContentValues();
         rowValues.put(OBSERVATION_FOREIGN_ID, foreignKey);
         rowValues.put(OBSERVATION_COLUMN_NAME, name);

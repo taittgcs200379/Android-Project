@@ -26,7 +26,8 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import java.util.Locale;
 
 public class ObserveCreator extends AppCompatActivity {
-
+    String id2, oDate;
+    public boolean SendData;
     private static final String[] Observation={"Sightings of animals", "Types of vegetation", "Weather conditions","Conditions of the trails"};
     AutoCompleteTextView ObservationDate, ObservationTime;
     Button dateButton,timeButton;
@@ -40,6 +41,16 @@ public class ObserveCreator extends AppCompatActivity {
         timeButton=findViewById(R.id.time_button);
         ObservationDate=findViewById(R.id.observation_date);
         ObservationTime=findViewById(R.id.time);
+
+        Intent t=getIntent();
+        SendData= t.getBooleanExtra("SendData",false);
+
+        if(SendData){
+            id2=t.getStringExtra("hike_id");
+            oDate=t.getStringExtra("date");
+
+            ObservationDate.setText(oDate);
+        }
 
         AutoCompleteTextView pObservation= (AutoCompleteTextView)findViewById(R.id.observation_creator);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,Observation);
@@ -141,6 +152,28 @@ public class ObserveCreator extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+
+    }
+    private void  saveDetails(){
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+
+        AutoCompleteTextView observeOption =(AutoCompleteTextView) findViewById(R.id.observation_creator);
+        AutoCompleteTextView observeDate =(AutoCompleteTextView) findViewById(R.id.observation_date);
+        AutoCompleteTextView observeTime =(AutoCompleteTextView) findViewById(R.id.time);
+        EditText observeComment=(EditText) findViewById(R.id.comment);
+
+
+        String option=observeOption.getText().toString();
+        String date=observeDate.getText().toString();
+        String time= observeTime.getText().toString();
+        String comment= observeComment.getText().toString();
+        if(SendData){
+
+            dbHelper.insertObservationDetails(""+id2,option,date,time,comment);
+            Toast.makeText(this, "Observation has been created" , Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
     private void showDatePickerDialog(){

@@ -58,6 +58,15 @@ public class TripsDetails extends AppCompatActivity {
         });
 
 
+        search.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                Intent a = new Intent(getApplicationContext(),TripsDetails.class);
+                startActivity(a);
+
+                return false;
+            }
+        });
 
         list.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
