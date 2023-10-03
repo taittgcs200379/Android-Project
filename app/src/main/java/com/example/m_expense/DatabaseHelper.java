@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OBSERVATION_TABLE = String.format(
             "CREATE TABlE %s(" +
                     "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "%s FOREIGN KEY , " +
+                    "%s TEXT, " +
                     "%s TEXT, " +
                     "%s TEXT, " +
                     "%s TEXT, " +
@@ -104,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(OBSERVATION_COLUMN_DATE, date);
         rowValues.put(OBSERVATION_COLUMN_TIME, time);
         rowValues.put(OBSERVATION_COLUMN_DESCRIPTION, comment);
-        return database.insertOrThrow(OBSERVATION_TABLE, null, rowValues);
+        return database.insertOrThrow(OBSERVATION_TABLE_NAME, null, rowValues);
     }
     public String getHikeDetails(){
         Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},

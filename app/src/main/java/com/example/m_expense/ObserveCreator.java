@@ -99,6 +99,7 @@ public class ObserveCreator extends AppCompatActivity {
         }
         else{
             displayAlert();
+            saveDetails();
         }
     }
     public void displayAlert(){
@@ -163,13 +164,13 @@ public class ObserveCreator extends AppCompatActivity {
         EditText observeComment=(EditText) findViewById(R.id.comment);
 
 
-        String option=observeOption.getText().toString();
+        String name=observeOption.getText().toString();
         String date=observeDate.getText().toString();
         String time= observeTime.getText().toString();
         String comment= observeComment.getText().toString();
         if(SendData){
 
-            dbHelper.insertObservationDetails(""+id2,option,date,time,comment);
+            dbHelper.insertObservationDetails(""+id2,name,date,time,comment);
             Toast.makeText(this, "Observation has been created" , Toast.LENGTH_LONG).show();
         }
 
