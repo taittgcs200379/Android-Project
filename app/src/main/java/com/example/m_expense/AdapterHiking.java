@@ -18,6 +18,7 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
     private Context context;
     private ArrayList<HikingModel> hikingList;
     private DatabaseHelper databaseHelper;
+
     public AdapterHiking(Context context, ArrayList<HikingModel> hikingList){
         this.context=context;
         this.hikingList=hikingList;

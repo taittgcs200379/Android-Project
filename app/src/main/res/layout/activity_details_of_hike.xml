@@ -5,10 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsOfHike">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginBottom="36dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/title"
@@ -20,16 +27,18 @@
             android:textSize="30sp"
             android:textStyle="bold"
             tools:text="DETAILS" />
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
+
             <TableRow>
+
                 <TextView
                     android:text="Name of hike:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailName"
@@ -39,6 +48,7 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
 
                 <TextView
@@ -54,12 +64,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:text="Date of hike:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailDate"
@@ -69,12 +80,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:text="Length of hike:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailLength"
@@ -84,12 +96,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:text="Level of hike:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailLevel"
@@ -99,12 +112,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:text="Parking choice:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailChoice"
@@ -114,12 +128,13 @@
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </TableRow>
+
             <TableRow>
+
                 <TextView
                     android:text="Description:"
                     android:textSize="15dp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detailDescription"
@@ -133,11 +148,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="411dp"
-        android:layout_height="535dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="311dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="MissingConstraints">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/observationRV"
+            android:layout_width="424dp"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp"
+            tools:listitem="@layout/observation_item" />
 
     </LinearLayout>
 

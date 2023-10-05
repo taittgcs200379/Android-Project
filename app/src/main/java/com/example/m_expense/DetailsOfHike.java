@@ -3,6 +3,7 @@ package com.example.m_expense;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 
 public class DetailsOfHike extends AppCompatActivity {
 
-    private String id;
+    private RecyclerView observeRV;
+    private AdapterObservation adapterObservation;
+    public static String id;
     private DatabaseHelper databaseHelper;
 
     private TextView Title, detailName,detailDestination, detailDate, detailLength, detailLevel, detailChoice, detailDescription;
@@ -26,6 +29,9 @@ public class DetailsOfHike extends AppCompatActivity {
         setContentView(R.layout.activity_details_of_hike);
 
         databaseHelper=new DatabaseHelper(this);
+        observeRV=findViewById(R.id.observationRV);
+        observeRV.setHasFixedSize(true);
+
 
         Intent detail= getIntent();
         id = detail.getStringExtra("hikingId");
@@ -40,6 +46,8 @@ public class DetailsOfHike extends AppCompatActivity {
         detailDescription=findViewById(R.id.detailDescription);
 
         loadDataById();
+        loadData();
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,4 +104,11 @@ public class DetailsOfHike extends AppCompatActivity {
         }
         db.close();
     }
+    private void loadData() {
+        adapterObservation = new AdapterObservation(this, databaseHelper.getAllObservationData());
+        observeRV.setAdapter(adapterObservation);
+
+    }
+
+
 }

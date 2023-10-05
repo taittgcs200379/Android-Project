@@ -92,11 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long deleteHikeDetails(String id){
         return database.delete(HIKE_TABLE_NAME,HIKE_COLUMN_ID+" =? ", new String[]{id});
     }
-    public void deleteAllHikeData(){
-       database.execSQL(" DELETE FROM "+HIKE_TABLE_NAME);
-       database.close();
 
-    }
     public long insertObservationDetails(String foreignKey, String name, String date, String time, String comment){
         ContentValues rowValues = new ContentValues();
         rowValues.put(OBSERVATION_FOREIGN_ID, foreignKey);
@@ -179,6 +175,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return hikeList;
+    }
+    public ArrayList<ObservationModel>getAllObservationData(){
+        ArrayList<ObservationModel> arrayList =new ArrayList<>();
+        String selectQuery=" SELECT * FROM " + OBSERVATION_TABLE_NAME  + "  WHERE " + OBSERVATION_FOREIGN_ID + "=\""+ DetailsOfHike.id +"\"";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor=db.rawQuery(selectQuery,null);
+        if(cursor.moveToFirst()){
+            do{
+                ObservationModel observationModel = new ObservationModel(
+                        ""+cursor.getInt(cursor.getColumnIndexOrThrow(OBSERVATION_ID)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(OBSERVATION_FOREIGN_ID)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(OBSERVATION_COLUMN_NAME)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(OBSERVATION_COLUMN_DATE)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(OBSERVATION_COLUMN_TIME)),
+                        ""+cursor.getString(cursor.getColumnIndexOrThrow(OBSERVATION_COLUMN_DESCRIPTION))
+                );
+
+                arrayList.add(observationModel);
+            }while (cursor.moveToNext());
+
+        }
+        db.close();
+        return arrayList;
     }
 
 }
