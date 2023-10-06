@@ -26,10 +26,12 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import java.util.Locale;
 
 public class ObserveCreator extends AppCompatActivity {
-    String id2, oDate;
-    public boolean SendData;
+    String id,id2,oTitle, oDate,oTime,oComment;
+
+    public boolean SendData, EditMode;
     private static final String[] Observation={"Sightings of animals", "Types of vegetation", "Weather conditions","Conditions of the trails"};
-    AutoCompleteTextView ObservationDate, ObservationTime;
+    AutoCompleteTextView ObservationTitle,ObservationDate, ObservationTime;
+    EditText ObservationComment;
     Button dateButton,timeButton;
     int hour, minute;
     @Override
@@ -39,17 +41,35 @@ public class ObserveCreator extends AppCompatActivity {
 
         dateButton=findViewById(R.id.observeDate);
         timeButton=findViewById(R.id.time_button);
+        ObservationTitle=findViewById(R.id.observation_creator);
         ObservationDate=findViewById(R.id.observation_date);
         ObservationTime=findViewById(R.id.time);
+        ObservationComment=findViewById(R.id.comment);
 
         Intent t=getIntent();
         SendData= t.getBooleanExtra("SendData",false);
+        Intent edit=getIntent();
+        EditMode=edit.getBooleanExtra("EditMode",false);
 
         if(SendData){
             id2=t.getStringExtra("hike_id");
             oDate=t.getStringExtra("date");
 
             ObservationDate.setText(oDate);
+        }
+        if(EditMode){
+            id=edit.getStringExtra("observeId");
+            id2=edit.getStringExtra("observeId2");
+            oTitle=edit.getStringExtra("name");
+            oDate=edit.getStringExtra("date");
+            oTime=edit.getStringExtra("time");
+            oComment=edit.getStringExtra("comment");
+
+            ObservationTitle.setText(oTitle);
+            ObservationDate.setText(oDate);
+            ObservationTime.setText(oTime);
+            ObservationComment.setText(oComment);
+
         }
 
         AutoCompleteTextView pObservation= (AutoCompleteTextView)findViewById(R.id.observation_creator);
@@ -172,6 +192,10 @@ public class ObserveCreator extends AppCompatActivity {
 
             dbHelper.insertObservationDetails(""+id2,name,date,time,comment);
             Toast.makeText(this, "Observation has been created" , Toast.LENGTH_LONG).show();
+        }
+        else if(EditMode){
+            dbHelper.updateObservationDetails(""+id,""+id2,name,date,time,comment);
+            Toast.makeText(this, "Observation has been updated " , Toast.LENGTH_LONG).show();
         }
 
 

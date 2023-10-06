@@ -109,6 +109,12 @@ public class DetailsOfHike extends AppCompatActivity {
         observeRV.setAdapter(adapterObservation);
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        loadData();
+    }
+
 
 
 }

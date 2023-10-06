@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,39 @@ public class AdapterObservation extends RecyclerView.Adapter<AdapterObservation.
         String comment=observationModel.getComment();
 
         holder.ObservationName.setText(name);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detail = new Intent(context, DetailOfObservation.class);
+                detail.putExtra("observationId",id);
+                context.startActivity(detail);
+
+            }
+        });
+        holder.editObservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent edit = new Intent(context, ObserveCreator.class);
+                edit.putExtra("observeId",id);
+                edit.putExtra("observeId2",id2);
+                edit.putExtra("name",name);
+                edit.putExtra("date",date);
+                edit.putExtra("time",time);
+                edit.putExtra("comment",comment);
+                edit.putExtra("EditMode",true);
+                context.startActivity(edit);
+                ((DetailsOfHike)context).onResume();
+            }
+        });
+        holder.deleteObservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseHelper.deleteObservationDetails(id);
+                ((DetailsOfHike)context).onResume();
+            }
+        });
+
     }
 
     @Override
@@ -52,10 +86,13 @@ public class AdapterObservation extends RecyclerView.Adapter<AdapterObservation.
 
     class ObservationViewHolder extends RecyclerView.ViewHolder{
         TextView ObservationName;
+        Button editObservation, deleteObservation;
         public ObservationViewHolder(@NonNull View itemView) {
 
             super(itemView);
             ObservationName=itemView.findViewById(R.id.observationName);
+            editObservation=itemView.findViewById(R.id.editObservation);
+            deleteObservation=itemView.findViewById(R.id.deleteObservation);
         }
     }
 }

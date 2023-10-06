@@ -102,32 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         rowValues.put(OBSERVATION_COLUMN_DESCRIPTION, comment);
         return database.insertOrThrow(OBSERVATION_TABLE_NAME, null, rowValues);
     }
-    public String getHikeDetails(){
-        Cursor results= database.query("hike_details", new String[]{"hike_id", "name","destination", "date","length","level","choice","description"},
-                null, null, null ,null, "name");
-        String resultText="";
-        results.moveToFirst();
-        while (!results.isAfterLast()){
-            int id = results.getInt(0);
-            String name = results.getString(1);
-            String destination = results.getString(2);
-            String date = results.getString(3);
-            String length = results.getString(4);
-            String level = results.getString(5);
-            String choice = results.getString(6);
-            String description = results.getString(7);
-            resultText+= "ID: "+id + "\n"
-                    + "Name of Hiking: "+ name + "\n"
-                    + "Destination: "+destination + "\n"
-                    + "Date: "+date + "\n"
-                    + "Length: "+length + "\n"
-                    + "Level: "+level + "\n"
-                    + "Parking Choice: "+ choice + "\n"
-                    + "Description: "+description+"\n"+"\n";
-            results.moveToNext();
-        }
-        return resultText;
-    }
+
     public ArrayList<HikingModel>getAllData(){
         ArrayList<HikingModel> arrayList =new ArrayList<>();
         String selectQuery=" SELECT * FROM " + HIKE_TABLE_NAME;
@@ -198,6 +173,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return arrayList;
+    }
+    public long updateObservationDetails(String id,String foreignId, String name, String date, String time,  String comment){
+        ContentValues rowValues = new ContentValues();
+        rowValues.put(OBSERVATION_FOREIGN_ID, foreignId);
+        rowValues.put(OBSERVATION_COLUMN_NAME, name);
+        rowValues.put(OBSERVATION_COLUMN_DATE, date);
+        rowValues.put(OBSERVATION_COLUMN_TIME,time);
+        rowValues.put(OBSERVATION_COLUMN_DESCRIPTION,comment);
+
+        return database.update(OBSERVATION_TABLE_NAME,rowValues,OBSERVATION_ID+" =? ", new String[]{id});
+
+
+    }
+    public long deleteObservationDetails(String id){
+        return database.delete(OBSERVATION_TABLE_NAME,OBSERVATION_ID+" =? ", new String[]{id});
     }
 
 }
