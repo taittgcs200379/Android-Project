@@ -46,6 +46,10 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
         String description=hikingModel.getHikingDescription();
 
         holder.hikingName.setText(name);
+        holder.hikingDestination.setText(destination);
+        holder.hikingDate.setText(date);
+        holder.hikingLevel.setText(level);
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,12 +106,15 @@ public class AdapterHiking extends RecyclerView.Adapter<AdapterHiking.HikingView
 
     class HikingViewHolder extends RecyclerView.ViewHolder{
 
-        TextView hikingName;
+        TextView hikingName, hikingDestination, hikingDate, hikingLevel;
         Button editHiking, deleteHiking, observeHiking;
         public HikingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             hikingName=itemView.findViewById(R.id.hikingName);
+            hikingDestination=itemView.findViewById(R.id.hikingDestination);
+            hikingDate=itemView.findViewById(R.id.hikingDate);
+            hikingLevel=itemView.findViewById(R.id.hikingLevel);
             editHiking=itemView.findViewById(R.id.editHiking);
             deleteHiking=itemView.findViewById(R.id.deleteHiking);
             observeHiking=itemView.findViewById(R.id.observeHiking);

@@ -13,15 +13,97 @@
         android:layout_height="120dp">
 
         <TextView
-            android:id="@+id/hikingName"
-            android:layout_width="300dp"
+
+            android:layout_width="180dp"
             android:layout_height="85dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
+            android:text="Name:"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/hikingName"
+            android:layout_width="250dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="0dp"
             android:text="Hiking Name"
             android:textColor="@color/white"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
+        <TextView
+
+            android:layout_width="180dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+
+            android:layout_centerInParent="true"
+            android:text="Des:"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/hikingDestination"
+            android:layout_width="250dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+
+            android:layout_centerInParent="true"
+            android:layout_marginTop="0dp"
+            android:text="Hiking Destination"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <TextView
+
+            android:layout_width="180dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="70dp"
+            android:layout_centerInParent="true"
+            android:text="Date:"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/hikingDate"
+            android:layout_width="250dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="70dp"
+            android:text="Hiking Name"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+        <TextView
+
+            android:layout_width="180dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="-20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:text="Level:"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/hikingLevel"
+            android:layout_width="250dp"
+            android:layout_height="85dp"
+            android:layout_alignParentLeft="false"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="-20dp"
+            android:layout_alignParentBottom="true"
+            android:text="Hiking Level"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/editHiking"
@@ -30,6 +112,7 @@
             android:layout_alignParentRight="true"
             android:backgroundTint="@color/yellow"
             android:text="EDIT"></Button>
+
 
         <Button
             android:id="@+id/observeHiking"
