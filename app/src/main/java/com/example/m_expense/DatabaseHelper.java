@@ -129,7 +129,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public ArrayList<HikingModel>getSearchData(String query){
         ArrayList<HikingModel> hikeList =new ArrayList<>();
-        String searchQuery=" SELECT * FROM " + HIKE_TABLE_NAME+" WHERE "+HIKE_COLUMN_NAME+" LIKE '%"+query+"%'";
+        String searchQuery=" SELECT * FROM " + HIKE_TABLE_NAME+" WHERE " +HIKE_COLUMN_NAME+" LIKE '%"+query+"%'";
+
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor=db.rawQuery(searchQuery,null);
         if(cursor.moveToFirst()){
