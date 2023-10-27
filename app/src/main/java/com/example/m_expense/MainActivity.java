@@ -204,13 +204,13 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Details of order")
                 .setMessage("Details enter:\n" +
-                        name+"\n"+
-                        destination+"\n"+
-                        date+"\n"+
-                        length+"\n"+
-                        levels+"\n"+
-                        choice+"\n"+
-                        description+"\n"
+                        "Name of hiking: "+ name+"\n"+
+                        "Destination:"+ destination+"\n"+
+                        "Date of Hiking:"+ date+"\n"+
+                        "Length of hike:"+length+"\n"+
+                        "Levels: "+levels+"\n"+
+                        "Parking choice: "+ choice+"\n"+
+                        "Description: "+description+"\n"
                 ).setNeutralButton("back", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
